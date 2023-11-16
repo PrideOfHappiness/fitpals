@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->string('userID', 10)->primary();
-            $table->string('nama');
+            $table->string('nama', 100);
             $table->string('alamat');
             $table->string('no_telp', 15);
             $table->string('email')->unique();
+            $table->enum('jenis_kelamin', ['L','P']);
             $table->enum('kategori', ['Member', 'Admin', 'Sales', 'Karyawan', 'Trainer']);
             $table->string('refferal_code')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();

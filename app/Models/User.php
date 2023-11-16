@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $table = 'users';
     protected $primaryKey = 'userID';
+    public $incrementing = false;
     protected $fillable = [
         'userID',
         'nama',
@@ -51,7 +52,7 @@ class User extends Authenticatable
     ];
 
     public function setUserIDFoto(){
-        return $this->hasMany(fotoUsers::class,'user_id', 'id');
+        return $this->hasMany(fotoUsers::class,'userID');
     }
 
     public function setUserIDTrainer(){

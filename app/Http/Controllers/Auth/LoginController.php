@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,36 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request){
+        $input = $request->only('userID_email','password');
+        $login = Auth::attempt(array('userID' => $input['userID_email'], 'password' => $input['password']));
+        if(!$login){
+            $login2 = Auth::attempt(array('email' => $input['userID_email'], 'password' => $input['password']));
+            if($login2){
+                if(Auth::user()->kategori == "Admin"){
+                    return redirect()->route("adminHome");
+                }elseif(Auth::user()->kategori == "Karyawan"){
+                    return redirect()->route('karyawanHome');
+                }else{
+                    return redirect()->route('home');
+                }
+            }else{
+                return redirect()->route('login')
+                    ->with('error','Maaf, Email dan/atau Password anda salah atau belum terdaftar.');
+            }
+        }elseif($login){
+            if(Auth::user()->kategori == "Admin"){
+                return redirect()->route("adminHome");
+            }elseif(Auth::user()->kategori == "Karyawan"){
+                return redirect()->route('karyawanHome');
+            }else{
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error','Maaf, Email dan/atau Password anda salah atau belum terdaftar.');
+        }
     }
 }

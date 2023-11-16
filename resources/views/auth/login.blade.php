@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aplikasi Manajemen Gambar Mobil Pribadi</title>
+  <title>Fitpals</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -40,7 +40,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="input-group mb-3">
-                            <input type="text" name="UserID_email" class="form-control" placeholder="User ID / Email">
+                            <input type="text" name="userID_email" class="form-control" placeholder="User ID / Email">
                             
                             <div class="input-group-append">
                               <div class="input-group-text">

@@ -12,12 +12,11 @@ class fotoUsers extends Model
     protected $table = 'foto_users';
 
     protected $fillable = [
-        'fotoUsersID',
         'userID',
         'namaFile',
     ];
 
-    public function userID_foto(){
-        return $this->belongsTo(User::class,'userID', 'userID');
+    public function userIDFoto(){
+        return $this->belongsTo(User::class, 'userID', 'userID');
     }
 }
