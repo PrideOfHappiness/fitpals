@@ -14,21 +14,28 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->string('kelasID', 10)->primary();
             $table->string('trainerID', 10);
-            $table->string('ruangID', 10);
+            $table->string('trainerID2', 10)->nullable();
+            $table->string('trainerID3', 10)->nullable();
+            $table->string('ruangID', 10)->nullable();
+            $table->string('locationID', 10);
             $table->string('id_pembuat', 10);
-            $table->string('id_otorisasi', 10);
+            $table->string('id_otorisasi', 10)->nullable();
             $table->string('nama_kelas', 100);
-            $table->dateTime('jam_awal');
-            $table->dateTime('jam_akhir');
+            $table->date('hari_pelaksanaan');
+            $table->time('jam_awal');
+            $table->time('jam_akhir');
             $table->enum('jenis_kelas', ['Umum', 'Privat']);
             $table->integer('kuota_peserta');
-            $table->string('status', 50);
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('trainerID')->references('trainerID')->on('trainer');
+            $table->foreign('trainerID2')->references('trainerID')->on('trainer');
+            $table->foreign('trainerID3')->references('trainerID')->on('trainer');
             $table->foreign('ruangID')->references('ruangID')->on('ruang');
             $table->foreign('id_pembuat')->references('userID')->on('users');
             $table->foreign('id_otorisasi')->references('userID')->on('users');
+            $table->foreign('locationID')->references('locationID')->on('locations');
         });
     }
 

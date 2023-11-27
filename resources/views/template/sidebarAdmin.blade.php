@@ -43,7 +43,7 @@
                 </a>
           </li>
         <i class="fa-solid fa-cars"></i> 
-              <a href="/admin/jenis" class="nav-link">
+              <a href="/admin/lokasi" class="nav-link">
                 <i class="fa-solid fa-location-dot"></i> 
                   <p>
                     Lokasi
@@ -51,7 +51,7 @@
                 </a>
           </li>
           <li class="nav-item"> 
-              <a href="/admin/ukuranKarakter" class="nav-link">
+              <a href="/admin/latihan" class="nav-link">
                 <i class="fa-solid fa-person-chalkboard"></i>
                   <p>
                     Latihan
@@ -59,7 +59,7 @@
                 </a>
           </li>
           <li class="nav-item"> 
-            <a href="/admin/setir" class="nav-link">
+            <a href="/admin/trainer" class="nav-link">
               <i class="fa-solid fa-person"></i>
                 <p>
                   Trainer
@@ -67,7 +67,7 @@
             </a>
           </li>
           <li class="nav-item"> 
-            <a href="/admin/mesin" class="nav-link">
+            <a href="/admin/ruangan" class="nav-link">
               <i class="fa-solid fa-people-roof"></i>
                 <p>
                   Ruangan
@@ -75,7 +75,7 @@
             </a>
           </li>
           <li class="nav-item"> 
-            <a href="/admin/merek" class="nav-link">
+            <a href="/admin/kelas" class="nav-link">
               <i class="fa-solid fa-person-chalkboard"></i>
                 <p>
                   Kelas
@@ -91,7 +91,7 @@
             </a>
           </li>
           <li class="nav-item"> 
-            <a href="/admin/platNomor" class="nav-link">
+            <a href="/admin/aboutUs" class="nav-link">
               <i class="fa-solid fa-info"></i>
                 <p>
                   Informasi Gym

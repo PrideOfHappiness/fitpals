@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('refferal_code')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token_reset_password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

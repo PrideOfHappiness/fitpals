@@ -12,6 +12,7 @@ class Latihan extends Model
     protected $table = 'latihan';
 
     protected $primaryKey = 'latihanID';
+    public $incrementing = false;
 
     protected $fillable = [
         'latihanID',

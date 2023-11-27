@@ -29,6 +29,7 @@ class User extends Authenticatable
         'kategori',
         'referral_code',
         'password',
+        'token_reset_password',
     ];
 
     /**
@@ -56,7 +57,7 @@ class User extends Authenticatable
     }
 
     public function setUserIDTrainer(){
-        return $this->hasMany(Trainer::class,'user_id', 'trainerID');
+        return $this->hasMany(Trainer::class,'userID', 'trainerID');
     }
 
     public function setUserIDMember(){
@@ -101,5 +102,9 @@ class User extends Authenticatable
     }
     public function setUserIDAttendancePrivat(){
         return $this->hasMany(AttendancePrivat::class,'userID', 'attendancePrivatID');
+    }
+
+    public function setUserIDTraffic(){
+        return $this->hasMany(TrafficLogin::class,'userID', 'trafficID');
     }
 }

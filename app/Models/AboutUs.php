@@ -10,6 +10,7 @@ class AboutUs extends Model
     use HasFactory;
     protected $table = 'about_us';
     protected $primaryKey = 'aboutUsID';
+    public $incrementing = false;
     protected $fillable = [
         'aboutUsID',
         'locationID',
@@ -17,7 +18,7 @@ class AboutUs extends Model
         'foto_gym',
     ];
 
-    public function getLocationID_aboutUs(){
+    public function getLocationIDAboutUs(){
         return $this->belongsTo(Location::class, 'locationID', 'locationID');
     }
 }

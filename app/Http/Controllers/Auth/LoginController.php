@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\TrafficLogin;
 
 class LoginController extends Controller
 {
@@ -47,9 +49,11 @@ class LoginController extends Controller
         if(!$login){
             $login2 = Auth::attempt(array('email' => $input['userID_email'], 'password' => $input['password']));
             if($login2){
-                if(Auth::user()->kategori == "Admin"){
+                $user = Auth::user();
+                event(new UserLoggedIn($user->userID));
+                if($user->kategori == "Admin"){
                     return redirect()->route("adminHome");
-                }elseif(Auth::user()->kategori == "Karyawan"){
+                }elseif($user->kategori == "Karyawan"){
                     return redirect()->route('karyawanHome');
                 }else{
                     return redirect()->route('home');
@@ -59,6 +63,7 @@ class LoginController extends Controller
                     ->with('error','Maaf, Email dan/atau Password anda salah atau belum terdaftar.');
             }
         }elseif($login){
+            event(new UserLoggedIn($login));
             if(Auth::user()->kategori == "Admin"){
                 return redirect()->route("adminHome");
             }elseif(Auth::user()->kategori == "Karyawan"){

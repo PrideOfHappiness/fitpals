@@ -12,6 +12,7 @@ class Trainer extends Model
     protected $table = 'trainer';
 
     protected $primaryKey = 'trainerID';
+    public $incrementing = false;
 
     protected $fillable = [
         'trainerID',
@@ -19,13 +20,22 @@ class Trainer extends Model
         'jenis',
     ];
 
-    public function setUserID_trainer(){
-        return $this->belongsTo(User::class,'user_id', 'userID');
+    public function getUserIDTrainer(){
+        return $this->belongsTo(User::class,'userID', 'userID');
     }
-    public function setTrainerID_kelas(){
+    public function setTrainerIDKelas(){
         return $this->hasMany(Kelas::class, 'trainerID', 'kelasID');
     }
-    public function setTrainerID_latihan(){
+
+    public function setTrainerIDKelas2(){
+        return $this->hasMany(Trainer::class,'trainerID2','kelasID');
+    }
+
+    public function setTrainerIDKelas3(){
+        return $this->belongsTo(Trainer::class,'trainerID3','kelasID');
+    }
+
+    public function setTrainerIDLatihan(){
         return $this->hasMany(LatihanSpesialisasi::class, 'trainerID', 'spesialisasiID');
     }
 }

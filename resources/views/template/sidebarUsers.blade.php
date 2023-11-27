@@ -26,7 +26,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Data Non Input</li>
           <li class="nav-item"> 
-              <a href="{{route('UsersJenisMobil')}}" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="fa-solid fa-car"></i>
                   <p>
                     Jenis
@@ -42,7 +42,7 @@
               </a>
           </li>
           <li class="nav-item"> 
-            <a href="/users/ukuranKarakter" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="fa-solid fa-rectangle-xmark"></i>
                 <p>
                   Ukuran Karakter
@@ -50,7 +50,7 @@
               </a>
           </li>
           <li class="nav-item"> 
-            <a href="/users/mesin" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="fa-solid fa-chevron-up"></i>
                 <p>
                   Merek
@@ -76,7 +76,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-header">Input Data</li>
             <li class="nav-item"> 
-                <a href="/users/fotoMobil" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fa-solid fa-car"></i>
                     <p>
                       Unggah Data Mobil

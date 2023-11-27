@@ -3,9 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Validator;
+use Str;
+//Models
 use App\Models\User;
 use App\Models\fotoUsers;
-use Str;
+use App\Models\Trainer;
+use App\Models\Member;
+use App\Models\Akuntansi;
+use App\Models\Kelas;
+use App\Models\Pesan;
+use App\Models\TrafficLogin;
+use App\Models\Attendance;
+use App\Models\AttendancePrivat;
+use App\Models\Pembayaran;
+use App\Models\Pemesanan;
+use App\Models\Promo;
+use App\Models\ProgressKelas;
+
 
 class UserController extends Controller
 {
@@ -225,35 +241,97 @@ class UserController extends Controller
         $users = User::find($userID);
 
         $checkFoto = fotoUsers::where('userID', $userID)->get();
+        $checkTrainer = Trainer::where('userID', $userID)->get();
+        $checkuserAkuntansi = Akuntansi::where('user_input', $userID)->orWhere('user_ubah', $userID)->get();
+        $checkUserPesan = Pesan::where('userID', $userID)->orWhere('salesID', $userID)->get();
+        $checkUserTrainer = Trainer::where('userID', $userID)->get();
+        $checkUserTraffic = TrafficLogin::where('userID', $userID)->get();
+        $checkUserPromo = Promo::where('userID', $userID)->orWhere('userID_penerima', $userID)->get();
+        $checkUserProgress = ProgressKelas::where('userID', $userID)->get();
+        $checkUserPemesanan = Pemesanan::where('userID', $userID)->get();
+        $checkUserPembayaran = Pembayaran::where('userID', $userID)->orWhere('salesID', $userID)->get();
+        $checkUserMember = Member::where('userID', $userID)->get();
+        $checkUserKelas = Kelas::where('id_pembuat', $userID)->orWhere('id_otorisasi', $userID)->get();
+        $checkUserAttendancePrivat = AttendancePrivat::where('userID', $userID)->get();
+        $checkUserAttendance = Attendance::where('userID', $userID)->get();
+        $checkUserAkuntansi = Akuntansi::where('user_input', $userID)->orWhere('user_ubah', $userID)->get();
 
-        if(sizeof($checkFoto) > 0){
+        if(sizeof($checkFoto) > 0 || $checkTrainer > 0 || $checkuserAkuntansi > 0 || $checkUserPesan > 0 || $checkUserPembayaran > 0
+        || $checkUserTrainer > 0 || $checkUserTraffic > 0 || $checkUserPromo > 0 || $checkUserProgress > 0 || $checkUserPemesanan > 0
+        || $checkUserMember > 0 || $checkUserKelas > 0 || $checkUserAttendancePrivat > 0 || $checkUserAttendance > 0 || $checkUserAkuntansi > 0){
             return redirect()->route('users.index')
-            ->with('error', 'Data User tidak dapat dihapus!');
+                ->with('error', 'Data User tidak dapat dihapus!');
         }else{
             $users->delete();
             return redirect()->route('users.index')
-            ->with('success', 'Data User berhasil dihapus!');
+                ->with('success', 'Data User berhasil dihapus!');
         }
     }
     public function searchUsers(Request $request){
         
     }
 
-    public function resetPassword(Request $request, $userID){
-        $users = User::find($userID);
-        $users->password = Str::random(12);
-        $users->save();
-        return view('users.resetPassword', compact('users'));
+    public function formResetPassword(){
+        return view('users.indexResetPassword');
     }
-
-    public function updatePassword(Request $request, $userID){
-        $users = User::find($userID);
-
+    public function resetPassword(Request $request){
         $this->validate($request, [
-            'password' => 'required',
-            'comfirmPassword' => 'required',
+            'email' => 'required',
         ]);
 
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        $name = User::where('email', $email)->get('nama');
+        if(!$user){
+            return redirect()->route('users.index')
+                ->with('error', 'Email tidak terdaftar!');
+        }else{
+            $passwordAcak = Str::random(4);
+            $nama = substr(User::where('email', $email)->get('nama'), 0, 4);
+            $angka = rand(1,9999);
+            $passwordBaru = $passwordAcak. ' - ' . $nama.$angka;
+            $token = Str::random(50);
+            $resetPassword = $user->update([
+                'password' => bcrypt($passwordBaru),
+                'token_reset_password' => $token,
+                'modified_at' => Carbon::now(),
+            ]);
+            return redirect('/users/resetpassword/set-password')
+                ->with('success', 'Password ' . $name . ' berhasil direset dengan password : ' . $passwordBaru .' dengan token : ' . substr($token, 0, 12));
+        }
+    }
 
+    public function formIndexSetPassword(){
+        return view('users.resetPassword');
+    }
+    public function updatePassword(Request $request){
+        
+        $this->validate($request, [
+            'token' => 'required',
+            'password' => 'required|custom_password',
+            'passwordConfirm' => 'required|custom_password',
+        ],[
+            'custom_password' => 'Password harus mengandung minimal satu huruf kapital, satu angka, dan satu karakter tambahan.',
+        ]);
+
+        $token = $request->input('token');
+        $password = $request->input('password');
+        $confirm = $request->input('passwordConfirm');
+        $users = User::where('token_reset_password', 'like', '%'. $token . '%')->first();
+        if(!$users){
+            return redirect()->route('users.index')
+                ->with('error', 'Token tidak terdaftar!');
+        }else{
+            if($password === $confirm){
+                $users->update([
+                    'password' => $password,
+                ]);
+                return redirect()->route('users.index')
+                    ->with('success', 'Password berhasil diubah!');
+            }else{
+                return redirect()->route('users.index')
+                    ->with('error', 'Password tidak cocok!');
+            }
+        }
     }
 }

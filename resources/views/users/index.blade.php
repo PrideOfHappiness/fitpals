@@ -14,6 +14,11 @@
                 <p>{{ $message }}</p>
             </div>
         @endif 
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+            </div>
+        @endif 
         <div class="mt-4"> 
             <section class="content"> 
                 <br>
@@ -58,12 +63,9 @@
                                 <td>{{ $user->kategori }}</td>
                                 <td>
                                     <form action = "{{ route('users.destroy', $user->userID) }}" method="Post">
-                                        <button class="badge bg-info"><a href="{{ route('users.show', $user->userID)}}">Edit Data Users</span></a></button>
+                                        <button class="badge bg-info"><a href="{{ route('users.show', $user->userID)}}">Detail Data Users</span></a></button>
                                         <button class="badge bg-success"><a href="{{ route('users.edit', $user->userID)}}">Edit Data Users</span></a></button>
-                                        <form action = "{{ route('resetPassword', $user->userID) }}" method="Put">
-                                            @csrf
-                                            <button type="submit" class="badge bg-warning">Reset Password</button>
-                                        </form>
+                                        <button class="badge bg-warning"><a href="/users/resetpassword/email">Reset Password</span></a></button>
                                         @csrf
                                             @method("DELETE")
                                             <button type="submit" class="badge bg-danger"> Hapus Data Users</button>

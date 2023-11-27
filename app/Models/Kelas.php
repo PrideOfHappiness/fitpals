@@ -10,13 +10,18 @@ class Kelas extends Model
     use HasFactory;
     protected $table = 'kelas';
     protected $primaryKey = 'kelasID';
-    protected $fillabbe = [
+    public $incrementing = false;
+    protected $fillable = [
         'kelasID',
         'trainerID',
+        'trainerID2',
+        'trainerID3',
         'ruangID',
         'id_pembuat',
         'id_otorisasi',
+        'locationID',
         'nama_kelas',
+        'hari_pelaksanaan',
         'jam_awal',
         'jam_akhir',
         'jenis_kelas',
@@ -26,6 +31,14 @@ class Kelas extends Model
 
     public function getTrainerIDKelas(){
         return $this->belongsTo(Trainer::class,'trainerID','trainerID');
+    }
+
+    public function getTrainerIDKelas2(){
+        return $this->belongsTo(Trainer::class,'trainerID2','trainerID');
+    }
+
+    public function getTrainerIDKelas3(){
+        return $this->belongsTo(Trainer::class,'trainerID3','trainerID');
     }
 
     public function getRuangIDKelas(){
@@ -45,5 +58,9 @@ class Kelas extends Model
     }
     public function setKelasIDAttendancePrivat(){
         return $this->hasMany(AttendancePrivat::class,'kelasID','attendancePrivatID');
+    }
+
+    public function getlocationIDKelas(){
+        return $this->belongsTo(Location::class,'locationID','locationID');
     }
 }

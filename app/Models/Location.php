@@ -11,6 +11,7 @@ class Location extends Model
 
     protected $table = 'locations';
     protected $primaryKey = "locationID";
+    public $incrementing = false;
 
     protected $fillable = [
         'locationID',
@@ -19,11 +20,15 @@ class Location extends Model
         'no_telp',
     ];
 
-    public function setLocationID_ruang(){
+    public function setLocationIDRuang(){
         return $this->hasMany(Ruang::class,'locationID', 'ruangID');
     }
 
-    public function setLocationID_aboutUs(){
+    public function setLocationIDAboutUs(){
         return $this->hasMany(AboutUs::class,'locationID', 'aboutUsID');
+    }
+
+    public function setLocationIDKelas(){
+        return $this->hasMany(Kelas::class,'locationID', 'kelasID');
     }
 }

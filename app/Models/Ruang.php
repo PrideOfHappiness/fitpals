@@ -10,6 +10,7 @@ class Ruang extends Model
     use HasFactory;
     protected $table = 'ruang';
     protected $primaryKey = 'ruangID';
+    public $incrementing = false;
     protected $fillable = [
         'ruangID',
         'locationID',
@@ -18,7 +19,7 @@ class Ruang extends Model
         'fasilitas',
     ];
 
-    public function locationID_ruang(){
+    public function locationIDRuang(){
         return $this->belongsTo(Location::class,'locationID', 'locationID');
     }
 
