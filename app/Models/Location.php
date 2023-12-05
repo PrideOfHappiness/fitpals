@@ -31,4 +31,12 @@ class Location extends Model
     public function setLocationIDKelas(){
         return $this->hasMany(Kelas::class,'locationID', 'kelasID');
     }
+
+    public function setLocationIDUsers(){
+        return $this->hasMany(User::class,'locationID', 'userID');
+    }
+
+    public function setLocationIDTrainer(){
+        return $this->hasMany(Trainer::class,'locationID', 'trainerID');
+    }
 }

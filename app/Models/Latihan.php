@@ -18,7 +18,7 @@ class Latihan extends Model
         'latihanID',
         'namaLatihan',
     ];
-    public function setLatihanID_latihan(){
+    public function setLatihanIDLatihan(){
         return $this->hasMany(LatihanSpesialisasi::class,'latihanID','spesialisasiID');
     }
 }

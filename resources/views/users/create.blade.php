@@ -37,6 +37,7 @@
                 @endif 
                 <form action="{{ route('users.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="location" id="location" value="{{ auth()->user()->locationID }}">
                     <div class="mb-3">
                         <label for="name">Nama</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Nama karyawan" required>

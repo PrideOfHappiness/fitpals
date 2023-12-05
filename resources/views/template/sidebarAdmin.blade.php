@@ -2,7 +2,7 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="{{ route('adminHome')}}" class="brand-link">
-    <img src="{{ asset('style/dist/img/laravel_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="{{ asset('style/dist/img/fitpals_logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">Dashboard Admin</span>
   </a>
 
@@ -32,7 +32,16 @@
                     Lihat Notifikasi
                   </p>
                 </a>
-          </li>
+        </li>
+        <li class="nav-header">Absensi</li>
+        <i class="fa-solid fa-cars"></i> 
+              <a href="/absensi" class="nav-link">
+                <i class="fa-solid fa-comment"></i> 
+                  <p>
+                    Absensi
+                  </p>
+                </a>
+        </li>
         <li class="nav-header">Data-data</li>
         <i class="fa-solid fa-cars"></i> 
               <a href="/admin/users" class="nav-link">
@@ -51,6 +60,14 @@
                 </a>
           </li>
           <li class="nav-item"> 
+            <a href="/admin/promo" class="nav-link">
+              <i class="fa-solid fa-person-chalkboard"></i>
+                <p>
+                  Promo
+                </p>
+              </a>
+        </li>
+          <li class="nav-item"> 
               <a href="/admin/latihan" class="nav-link">
                 <i class="fa-solid fa-person-chalkboard"></i>
                   <p>
@@ -58,6 +75,14 @@
                   </p>
                 </a>
           </li>
+          <li class="nav-item"> 
+            <a href="/admin/latihanSpesialisasi" class="nav-link">
+              <i class="fa-solid fa-person-chalkboard"></i>
+                <p>
+                  Latihan Spesialisasi
+                </p>
+              </a>
+        </li>
           <li class="nav-item"> 
             <a href="/admin/trainer" class="nav-link">
               <i class="fa-solid fa-person"></i>
@@ -108,7 +133,7 @@
                 </a>
           </li>
           <li class="nav-item"> 
-              <a href="#" class="nav-link">
+              <a href="/karyawan/laporanKeuangan" class="nav-link">
                 <i class="fa-solid fa-coins"></i>
                   <p>
                     Financial Report 

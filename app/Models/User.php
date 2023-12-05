@@ -30,6 +30,7 @@ class User extends Authenticatable
         'referral_code',
         'password',
         'token_reset_password',
+        'locationID',
     ];
 
     /**
@@ -106,5 +107,12 @@ class User extends Authenticatable
 
     public function setUserIDTraffic(){
         return $this->hasMany(TrafficLogin::class,'userID', 'trafficID');
+    }
+
+    public function getLocationIDUsers(){
+        return $this->belongsTo(Location::class,'locationID', 'locationID');
+    }
+    public function setCodeQRIDUsers(){
+        return $this->hasMany(CodeQR::class,'userID', 'QRCode_code');
     }
 }

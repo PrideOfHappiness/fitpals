@@ -21,13 +21,13 @@ class RuangController extends Controller
     public function store(Request $request){
         $this->validate($request,[
             'name' => 'required',
-            'lokasi' => 'required',
+            'location' => 'required',
             'kapasitas' => 'required',
             'fasilitas' => 'required',
         ]);
 
         $nama = $request->name;
-        $location = $request->lokasi;
+        $location = $request->location;
         $kapasitas = $request->kapasitas;
         $fasilitas = $request->fasilitas;
         $jumlah = Location::count();

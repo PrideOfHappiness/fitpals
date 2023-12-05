@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'Trainer' => \App\Http\Middleware\Trainer::class,
         'Karyawan' => \App\Http\Middleware\Karyawan::class,
         'Sales' => \App\Http\Middleware\Sales::class,
+        'SuperAdmin' => \App\Http\Middleware\SuperAdmin::class,
         'CheckRoleDashboard' => \App\Http\Middleware\DashboardRoleCheck::class,
     ];
 }

@@ -22,15 +22,7 @@
                         <label for="name">Nama Ruangan</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Nama Ruangan" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="name">Lokasi Gym</label>
-                        <select name="lokasi" id="lokasi" class="form-control">
-                            <option value="">Silahkan pilih lokasi Gym terlebih dahulu!</option>
-                            @foreach($data as $dt)
-                                <option value="{{ $dt->locationID }}">{{ $dt->namaLokasi }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <input type="hidden" class="form-control" name="location" id="location" value="{{ auth()->user()->locationID }}"
                     <div class="mb-3">
                         <label for="name">Kapasitas Ruangan</label>
                         <input type="number" class="form-control" name="kapasitas" id="kapasitas" placeholder="Nama Ruangan" required>

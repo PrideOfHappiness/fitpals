@@ -10,6 +10,7 @@ class Promo extends Model
     use HasFactory;
     protected $table = 'promo';
     protected $primaryKey = 'promoID';
+    public $incrementing = false;
     protected $fillable = [
         'promoID',
         'userID_pembuat',
@@ -21,10 +22,12 @@ class Promo extends Model
         'tanggal_akhir',
     ];
 
-    public function getUserID_promo1(){
+    public function getUserIDPromo1(){
         return $this->belongsTo(User::class,'userID_pembuat', 'userID');
     }
-    public function getUserID_promo2(){
+    public function getUserIDPromo2(){
         return $this->belongsTo(User::class,'userID_userID_penerima', 'userID');
     }
+
+    
 }

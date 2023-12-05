@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trainer', function (Blueprint $table) {
-            $table->string('trainerID', 10)->primary();
+        Schema::create('q_r_codes', function (Blueprint $table) {
+            $table->string('QRcode_code')->primary();
             $table->string('userID');
-            $table->enum('jenis', ['Trainer', 'Personal Trainer']);
-            $table->string('locationID');
+            $table->string('status', 100);
+            $table->datetime('datetime_used')->nullable();
             $table->timestamps();
 
             $table->foreign('userID')->references('userID')->on('users');
-            $table->foreign('locationID')->references('locationID')->on('locations');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trainer');
+        Schema::dropIfExists('q_r_codes');
     }
 };

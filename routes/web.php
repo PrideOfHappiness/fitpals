@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -38,7 +39,6 @@ Route::get('/login', function () {
 Auth::routes();
 Route::middleware(['auth'])->group(function() {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', 'DashboardController@index')->middleware('CheckRoleDashboard');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -73,15 +73,23 @@ Route::middleware(['Admin'])->group(function () {
     Route::resource('admin/latihanSpesialisasi', LatihanSpesialisasiController::class);
     //Promo
     Route::resource('admin/promo', PromoController::class);
+    //Laporan Keuangan
+    Route::get('/karyawan/laporanKeuangan', [LaporanKeuanganController::class, 'index'])->name('laporanKeuangan');
+    Route::get('/karyawan/laporanKeuangan/download/', [LaporanKeuanganController::class, 'download'])->name('laporanKeuanganDownload');
+    //Absensi
+    Route::get('/absensi', [AttendanceController::class, 'index']);
+    Route::get('/absensi/generate_QRCode', [AttendanceController::class, 'generate'])->name('createAbsensi');
+    Route::get('absensi/QRCode/keluar/{id}', [AttendanceController::class, 'keluar'])->name('keluarAbsensi');
 });
 
 Route::middleware(['Karyawan'])->group(function () {
     Route::get('/karyawan/home', [HomeController::class, 'karyawanHome'])->name('karyawanHome');
     //Akuntansi
-    Route::resource('/karyawan/akuntansi', AkuntansiController::class);
-    //Laporan Keuangan
-    Route::get('/karyawan/laporanKeuangan', [LaporanKeuanganController::class, 'index'])->name('laporanKeuangan');
-    Route::get('/karyawan/laporanKeuangan/download/', [LaporanKeuanganController::class, 'download'])->name('laporanKeuanganDownload');
+    Route::resource('karyawan/akuntansi', AkuntansiController::class);
+    //Absensi
+    Route::get('/karyawan/absensi', [AttendanceController::class, 'index']);
+    Route::get('karyawan/absensi/generate_QRCode', [AttendanceController::class, 'create'])->name('createAbsensiKaryawan');
+    Route::post('karyawan/absensi/QRCode/scan', [AttendanceController::class, 'store']); 
 });
 
 Route::middleware(['Sales'])->group(function () {
@@ -96,4 +104,8 @@ Route::middleware(['Member'])->group(function () {
 
 Route::middleware(['Trainer'])->group(function () {
 
+});
+
+Route::middleware(['SuperAdmin'])->group(function () {
+    
 });

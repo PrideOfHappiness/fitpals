@@ -10,16 +10,17 @@ class LatihanSpesialisasi extends Model
     use HasFactory;
     protected $table = 'latihan_spesialisasi';
     protected $primaryKey = 'spesialisasiID';
+    public $incrementing = false;
     protected $fillable = [
         'spesialisasiID',
         'trainerID',
         'latihanID',
     ];
 
-    public function getTrainerID_latihan(){
+    public function getTrainerIDLatihan(){
         return $this->belongsTo(Trainer::class,'trainerID','trainerID');
     }
-    public function getLatihanID_latihan(){
+    public function getLatihanIDLatihan(){
         return $this->belongsTo(Latihan::class,'latihanID','latihanID');
     }
 }

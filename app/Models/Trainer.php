@@ -18,6 +18,7 @@ class Trainer extends Model
         'trainerID',
         'userID',
         'jenis',
+        'locationID',
     ];
 
     public function getUserIDTrainer(){
@@ -37,5 +38,9 @@ class Trainer extends Model
 
     public function setTrainerIDLatihan(){
         return $this->hasMany(LatihanSpesialisasi::class, 'trainerID', 'spesialisasiID');
+    }
+
+    public function setTrainerIDLocation(){
+        return $this->belongsTo(Location::class, 'locationID', 'locationID');
     }
 }

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('jumlah_debet');
             $table->integer('jumlah_kredit');
             $table->string('user_input', 10);
-            $table->string('user_ubah', 10);
+            $table->string('user_ubah', 10)->nullable();
+            $table->string('token_ubah_data_akun', 20)->nullable();
             $table->timestamps();
 
             $table->foreign('kodeID_debet')->references('kode_akun')->on('kode_akun');

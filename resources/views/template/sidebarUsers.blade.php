@@ -2,8 +2,8 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{ asset('style/dist/img/honda-logo-motorcycle-brand-png-16.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Tes Gambar</span>
+      <img src="{{ asset('style/dist/img/fitpals_logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Dashboard Karyawan</span>
     </a>
 
     <!-- Sidebar -->
@@ -24,72 +24,22 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2"> 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-header">Data Non Input</li>
+          <li class="nav-header">Data-data</li>
           <li class="nav-item"> 
-              <a href="#" class="nav-link">
+              <a href="/karyawan/akuntansi" class="nav-link">
                 <i class="fa-solid fa-car"></i>
                   <p>
-                    Jenis
+                    Akuntansi
                   </p>
                 </a>
           </li>
           <li class="nav-item"> 
-            <a href="#" class="nav-link">
+            <a href="{{ route('laporanKeuangan') }}" class="nav-link">
               <i class="fa-solid fa-signs-post"></i>
                 <p>
-                  Letak Setir
+                  Laporan Keuangan
                 </p>
               </a>
-          </li>
-          <li class="nav-item"> 
-            <a href="#" class="nav-link">
-              <i class="fa-solid fa-rectangle-xmark"></i>
-                <p>
-                  Ukuran Karakter
-                </p>
-              </a>
-          </li>
-          <li class="nav-item"> 
-            <a href="#" class="nav-link">
-              <i class="fa-solid fa-chevron-up"></i>
-                <p>
-                  Merek
-                </p>
-              </a>
-          </li>
-          <li class="nav-item"> 
-            <a href="#" class="nav-link">
-              <i class="fa-solid fa-rectangle-xmark"></i>
-                <p>
-                  Plat Nomor
-                </p>
-              </a>
-          </li>
-          <li class="nav-item"> 
-            <a href="/users/mesin" class="nav-link">
-              <i class="fa-solid fa-bolt"></i>
-                <p>
-                  Mesin
-                </p>
-              </a>
-          </li>
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-header">Input Data</li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link">
-                  <i class="fa-solid fa-car"></i>
-                    <p>
-                      Unggah Data Mobil
-                    </p>
-                  </a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link">
-                  <i class="fa-solid fa-car"></i>
-                    <p>
-                      Unggah Data Mobil Komparasi
-                    </p>
-                  </a>
             <li class="nav-header">Logout</li>
             <li class="nav-item menu-open"> 
                 <a href="{{ route('logout')}}" class="nav-link active">

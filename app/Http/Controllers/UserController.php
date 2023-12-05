@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Validator;
 use Str;
+use Auth;
 //Models
 use App\Models\User;
 use App\Models\fotoUsers;
@@ -26,7 +27,11 @@ use App\Models\ProgressKelas;
 class UserController extends Controller
 {
     public function index(){
-        $users = User::paginate(20);
+        if(Auth::user()->kategori == 'Admin'){
+            $users = User::where('locationID', Auth::user()->locationID)->paginate(20);
+        }else{
+            $users = User::paginate(20);
+        }
         return view('users.index', compact('users'));
     }
 
@@ -36,6 +41,7 @@ class UserController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
+            'location' => 'required',
             'name' => 'required',
             'alamat' => 'required',
             'telp' => 'required',
@@ -55,6 +61,7 @@ class UserController extends Controller
         $kategori = $request->kategori;
         $password = $request->password;
         $confirmPass = $request->passwordConfirm;
+        $location = $request->location;
 
         if($password === $confirmPass){
             if($kategori == 'admin'){
@@ -115,6 +122,7 @@ class UserController extends Controller
                 'kategori'=> $status,
                 'email'=> $email,
                 'password'=> $password,
+                'locationID'=> $location,
             ]);
             if($request->hasFile('fotouser')){
                 $file = $request->file('fotouser');

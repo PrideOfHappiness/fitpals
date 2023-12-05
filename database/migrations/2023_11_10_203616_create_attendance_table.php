@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kelasID', 10)->nullable();
             $table->dateTime('datetime_masuk');
             $table->dateTime('datetime_kelas_masuk')->nullable();
-            $table->dateTime('datetime_keluar');
+            $table->dateTime('datetime_keluar')->nullable();
             $table->dateTime('datetime_kelas_keluar')->nullable();
             $table->string('attendance_token',100);
             $table->timestamps();

@@ -20,10 +20,12 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->date('tanggal_mulai');
             $table->date('tanggal_akhir');
+            $table->string('locationID', 10)->nullable();
             $table->timestamps();
 
             $table->foreign('userID_pembuat')->references('userID')->on('users');
             $table->foreign('userID_penerima')->references('userID')->on('users');
+            $table->foreign('locationID')->references('locationID')->on('locations');
         });
     }
 

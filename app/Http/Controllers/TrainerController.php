@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Trainer;
 use App\Models\User;
 use Str;
-use Log;
+use Auth;
 
 class TrainerController extends Controller
 {
@@ -16,12 +16,13 @@ class TrainerController extends Controller
     }
 
     public function create(){
-        $data = User::where('kategori', '=', 'Trainer')->get();
+        $data = User::where([['kategori', '=', 'Trainer'],['locationID', Auth::user()->locationID]])->get();
         return view('trainer.create', compact('data'));
     }
 
     public function store(Request $request){
 
+        $location = Auth::user()->locationID;
         $userID = $request->input('name');
         $jenis = $request->input('jenis');
         $cekData = Trainer::where([['userID', $userID],['jenis', $jenis]])->exists();
@@ -37,6 +38,7 @@ class TrainerController extends Controller
                 $acak = strtoupper(Str::random(1));
                 $trainerID = $pertama.$angka1.$acak.$angka2;
                 $trainer = Trainer::create([
+                    'locationID' => $location,
                     'trainerID' => $trainerID,
                     'userID' => $userID,
                     'jenis' => 'Trainer',
@@ -50,6 +52,7 @@ class TrainerController extends Controller
                     $acak = strtoupper(Str::random(1));
                     $trainerID = $pertama1.$angka1.$acak.$angka2;
                     $trainer = Trainer::create([
+                        'locationID' => $location,
                         'trainerID' => $trainerID,
                         'userID' => $userID,
                         'jenis' => 'Personal Trainer',
