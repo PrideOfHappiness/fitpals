@@ -75,12 +75,12 @@ class PromoController extends Controller
 
     public function show($promoID){
         $promo = Promo::find($promoID);
-        return redirect()->route('promo.show', compact('promo'));
+        return view('promo.show', compact('promo'));
     }
 
     public function edit($promoID){
         $promo = Promo::find($promoID);
-        return redirect()->route('promo.edit', compact('promo'));
+        return view('promo.edit', compact('promo'));
     }
 
     public function update(Request $request, $promoID){
@@ -102,7 +102,7 @@ class PromoController extends Controller
         $dataAkhir= $request->dataAkhir;
 
         if($request->penerima != ""){
-            Promo::update([
+            $promo->update([
                 'kode_promo' => $kode,
                 'nama_promo' => $nama,
                 'deskripsi' => $deskripsi,
@@ -111,7 +111,7 @@ class PromoController extends Controller
                 'userID_penerima' => $request->penerima,
             ]);
         }else{
-            Promo::update([
+            $promo->update([
                 'kode_promo' => $kode,
                 'nama_promo' => $nama,
                 'deskripsi' => $deskripsi,
@@ -119,6 +119,8 @@ class PromoController extends Controller
                 'tanggal_akhir' => $dataAkhir,
             ]);
         }
+        return redirect()->route('promo.index')
+            ->with('success', 'Data promo berhasil diubah!');
     }
 
     public function destroy($promoID, Request $request){

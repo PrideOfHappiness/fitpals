@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                         @php $i = 1 @endphp
-                        @foreach ($kelas as $user)
+                        @foreach ($dataKelas as $user)
                             <tr>
                                 <td>{{ $i++}}</td>
                                 <td>{{ $user->kelasID }}</td>
@@ -48,7 +48,8 @@
                                 <td>{{ $user->kuota_peserta }}</td>
                                 <td>{{ $user->status }}</td>
                                 <td>
-                                    <form action = "{{ route('verifikasiKelas', $user->kelasID)}}" method="Post">
+                                    <form action = "{{ route('setVerifikasiKelas', $user->kelasID)}}" method="Post">
+                                        @csrf
                                         <button type="submit" name="verifikasiKelas" class="btn btn-success" value="setuju">Verifikasi Kelas</button>
                                         <button type="submit" name="verifikasiKelas" class="btn btn-danger" value="tolak">Tidak Verifikasi Kelas</button>
                                     </form>

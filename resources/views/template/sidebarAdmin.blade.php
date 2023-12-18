@@ -133,7 +133,7 @@
                 </a>
           </li>
           <li class="nav-item"> 
-              <a href="/karyawan/laporanKeuangan" class="nav-link">
+              <a href="/admin/laporanKeuangan" class="nav-link">
                 <i class="fa-solid fa-coins"></i>
                   <p>
                     Financial Report 

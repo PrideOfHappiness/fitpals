@@ -9,6 +9,11 @@ use App\Models\User;
 use App\Models\Trainer;
 use App\Models\Ruang;
 use Carbon\Carbon;
+use App\Models\CodeQR;
+use Str;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Response;
 
 class KelasController extends Controller
 {
@@ -148,8 +153,10 @@ class KelasController extends Controller
     public function edit($kelasID){
         $kelas = Kelas::find($kelasID);
         $hari1 = Carbon::createFromFormat('Y-m-d', $kelas->hari_pelaksanaan);
+        $trainer = Trainer::selectRaw("trainer.trainerID as trainerID, concat(users.nama, ' - ', trainer.jenis) as namaTrainer")
+        ->join('users', 'trainer.userID', '=', 'users.userID')->orderBy('trainer.trainerID', 'asc')->get();
         $hari2 = $hari1->isoFormat('dddd, DD MMMM YYYY');
-        return view('kelas.edit', compact('kelas', 'hari2'));
+        return view('kelas.edit', compact('kelas', 'hari2', 'trainer'));
     }
 
     public function update(Request $request, $kelasID){
@@ -214,23 +221,46 @@ class KelasController extends Controller
 
     public function verifikasiKelas(Request $request, $kelasID){
         $kelas = Kelas::find($kelasID);
-        if($request->hasAction('verifikasiKelas')){
-            $tombol = $request->input('verifikasiKelas');
+        $tombol = $request->input('verifikasiKelas');
 
-            if($tombol == 'setuju'){
-                $status = 'Sudah Diverifikasi Admin';
-                $kelas->update([
-                    'status' => $status,
-                ]);
-            }else{
-                $status = 'Ditolak Admin';
-                $kelas->update([
-                    'status' => $status,
-                ]);
-            }
+        if($tombol == 'setuju'){
+            $status = 'Sudah Diverifikasi Admin';
+            $kelas->update([
+            'status' => $status,
+            ]);
+        }else{
+            $status = 'Ditolak Admin';
+            $kelas->update([
+                'status' => $status,
+            ]);
         }
 
-        return redirect()->route('verifikasiKelas')
+        return redirect()->route('getVerifikasiKelas')
             ->with('info', 'Data Kelas ' . $status . ' !');
+    }
+
+    public function getQRCodeAbsen($kelasID){
+        $kelas = Kelas::find($kelasID);
+        $kode = strtoupper(Str::random(20));
+        $QRCode  = QrCode::generate($kode);
+
+        $data = CodeQR::create([
+            'QRCode_code' => $kode,
+            'kelasID' => $kelas->kelasID,
+            'status' => 'Baru',
+            'data' => $kode,
+            'datetime_used' => Carbon::now(),
+        ]);
+        return view('kelas.absensi', compact('QRCode', 'data'));
+    }
+    public function downloadAbsen($kode){
+        set_time_limit(300);
+        $qrCode = QrCode::size(300)->generate($kode);
+        $path = storage_path('app/public/qrcodes/') . $kode . '.png';
+        file_put_contents($path, $qrCode);
+
+        // Memberikan file untuk diunduh
+        return Response::download($path, 'qrcode.png');
+
     }
 }

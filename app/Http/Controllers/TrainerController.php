@@ -65,6 +65,7 @@ class TrainerController extends Controller
                 $acak = strtoupper(Str::random(1));
                 $trainerID = $pertama.$angka1.$acak.$angka2;
                 $trainer = Trainer::create([
+                    'locationID' => $location,
                     'trainerID' => $trainerID,
                     'userID' => $userID,
                     'jenis' => 'Trainer',
@@ -76,6 +77,7 @@ class TrainerController extends Controller
                 $acak = strtoupper(Str::random(1));
                 $trainerID = $pertama1.$angka1.$acak.$angka2;
                 $trainer = Trainer::create([
+                    'locationID' => $location,
                     'trainerID' => $trainerID,
                     'userID' => $userID,
                     'jenis' => 'Personal Trainer',
@@ -85,7 +87,8 @@ class TrainerController extends Controller
                     ->with('error','Status Trainer belum dipilih!');
         }
     }
-    return view('trainer.index')
+    $trainer = Trainer::paginate(10);
+    return view('trainer.index', compact('trainer'))
         ->with('success','Data sudah dimasukkan!');
 }
 

@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>0</h3>
+                            <h3>{{ $absensi }}</h3>
                             <p>Absensi</p>
                         </div>
                         <div class="icon">
@@ -25,7 +25,7 @@
                 <div class="col-md-4">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3><h3>Rp.{{ $pemasukkan }}</h3>
+                            <h3><h3>{{ $pemasukkan }}</h3>
                             <p>Pemasukkan</p>
                         </div>
                         <div class="icon">
@@ -37,7 +37,7 @@
                 <div class="col-md-4">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>Rp.{{ $pengeluaran }}</h3>
+                            <h3>{{ $pengeluaran }}</h3>
                             <p>Pengeluaran</p>
                         </div>
                         <div class="icon">
@@ -49,7 +49,7 @@
                 <div class="col-md-4">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>Rp.{{ $profitabilitas }}</h3>
+                            <h3>{{ $profitabilitas }}</h3>
                             <p>Profitabilitas</p>
                         </div>
                         <div class="icon">

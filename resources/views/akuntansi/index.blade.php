@@ -6,7 +6,7 @@
 </head>
 <body>
     @include('template/navbar')
-    @include('template/sidebarAdmin')
+    @include('template/sidebarUsers')
 
     <div class="container">
         @if ($message = Session::get('success'))

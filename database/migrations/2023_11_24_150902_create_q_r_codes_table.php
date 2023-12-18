@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('q_r_codes', function (Blueprint $table) {
             $table->string('QRcode_code')->primary();
-            $table->string('userID');
+            $table->string('kelasID');
+            $table->string('userID')->nullable();
             $table->string('status', 100);
             $table->datetime('datetime_used')->nullable();
             $table->timestamps();
 
             $table->foreign('userID')->references('userID')->on('users');
+            $table->foreign('kelasID')->references('kelasID')->on('kelas');
         });
     }
 

@@ -63,4 +63,9 @@ class Kelas extends Model
     public function getlocationIDKelas(){
         return $this->belongsTo(Location::class,'locationID','locationID');
     }
+
+    public function setKelasIDQRCode(){
+        return $this->hasMany(CodeQR::class,'kelasID','QRCode_code');
+    }
+
 }

@@ -14,11 +14,17 @@ class CodeQR extends Model
     protected $fillable = [
         'QRCode_code',
         'userID',
+        'kelasID',
         'status', 
+        'data',
         'datetime_used',
     ];
 
     public function getCodeQRIDUsers(){
-        return $this->belongsTo(CodeQR::class,'userID', 'userID');
+        return $this->belongsTo(User::class,'userID', 'userID');
+    }
+
+    public function getCodeQRIDKelas(){
+        return $this->belongsTo(Kelas::class,'kelasID', 'kelasID');
     }
 }

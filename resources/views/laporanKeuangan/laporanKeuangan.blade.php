@@ -14,6 +14,13 @@
     header {
         background-color: #f6f6f6;
         padding: 20px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    header img {
+        width: 25px;
+        height: 25px;
     }
 
     h1 {
@@ -59,10 +66,10 @@
 </head>
 <body> 
     <header>
-        <img src="{{ asset('style/dist/img/fitpals_logo.jpg') }}" alt="Logo Fitpals" class="logo">
-        <h1>Fitpals Gym Solo</h1>
-        <p>Jalan Wora-Wari 32, Kelurahan Sriwedari, Kecamatan Laweyan, Kota Surakarta, Jawa Tengah 57141</p>
-        <p>No. Telepon: (0271)851785</p>
+        <img src="{{ asset('style/dist/img/fitpals_logo.jpg')}}" alt="Logo Fitpals" class="logo">
+        <h1>{{ $locationNama }}</h1>
+        <p>{{ $locationAlamat }}</p>
+        <p>No. Telepon: {{ $locationTelp }}</p>
     </header>
     <main>
         <h2>Laporan Keuangan</h2>
@@ -77,7 +84,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($laporan as $item)
+                @foreach ($laporanKeuangan as $item)
                     <tr>
                         <td>{{ $item['kode_akun'] }}</td>
                         <td>{{ $item['nama_akun']}}</td>
@@ -85,14 +92,13 @@
                         <td>{{ $item['total_kredit'] }}</td>
                     </tr>
                 @endforeach
-                    <tr>
-                        <td colspan="2">Total</td>
-                        <td><?php echo 'Rp' . number_format(array_sum(array_column($laporan, 'total_debet')), 0, ',', '.'); ?></td>
-                        <td><?php echo 'Rp' . number_format(array_sum(array_column($laporan, 'total_kredit')), 0, ',', '.'); ?></td>
-                    </tr>
+                <tr>
+                    <td colspan="2">Total Saldo</td>
+                    <td>{{ $item['saldo_debet'] }}</td>
+                    <td>{{ $item['saldo_kredit'] }}</td>
+                </tr>
             </tbody>
         </table>
-        <p>Dicetak oleh: <?php echo $laporan[0]['kepala']; ?></p>
-        <p>Tanggal: <?php echo date('d-m-Y'); ?></p>
     </main>
 </body>
+</html>

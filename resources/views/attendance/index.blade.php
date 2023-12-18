@@ -24,7 +24,7 @@
                 <h1>Data Attendance Fitpals</h1>
                 <br>
                 <div class = "pull-right mb-2" class = "wrapper">
-                    <a class="btn btn-success" href="{{ route('createAbsensi') }}"> 
+                    <a class="btn btn-success" href="{{ route('createAbsensiMasuk') }}"> 
                         <i class="fa-solid fa-plus"></i>
                             Catat Waktu Masuk
                     </a>

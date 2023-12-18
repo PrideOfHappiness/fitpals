@@ -24,7 +24,7 @@
                 <h1>Data Laporan Keuangan Fitpals</h1>
                 <br>
                 <div class = "pull-right mb-2">
-                    <a class="btn btn-success" href="{{ route('laporanKeuanganDownload') }}"> 
+                    <a class="btn btn-success" href="{{ route('pilihPeriodeLK') }}"> 
                         <i class="fa-solid fa-file-arrow-down"></i>
                             Unduh Laporan Keuangan
                     </a>
@@ -33,7 +33,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>No. </th>
                             <th>Kode Akun</th>
                             <th>Nama Akun </th>
                             <th>Nominal Debet</th>
@@ -44,7 +43,6 @@
                         @php $i = 1 @endphp
                         @foreach ($laporanKeuangan as $item)
                             <tr>
-                                <td>{{ $i++}}
                                 <td>{{ $item['kode_akun'] }}</td>
                                 <td>{{ $item['nama_akun']}}</td>
                                 <td>{{ $item['total_debet'] }}</td>

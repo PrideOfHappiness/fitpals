@@ -67,19 +67,25 @@ Route::middleware(['Admin'])->group(function () {
     Route::resource('admin/kelas', KelasController::class);
     Route::get('/admin/kelas/pilihRuang/{id}', [KelasController::class, 'pilihRuang'])->name('pilihRuang');
     Route::post('/admin/kelas/setPilihRuang/{id}', [KelasController::class, 'setPilihRuang'])->name('setPilihRuang');
-    Route::get('admin/kelas/verifikasi', [AboutUsController::class, 'verifikasi'])->name('getVerifikasiKelas');
-    Route::post('admin/kelas/verifikasi/{id}', [AboutUsController::class, 'verifikasiKelas'])->name('setVerifikasiKelas');
+    Route::get('kelas/verifikasi', [KelasController::class, 'verifikasi'])->name('getVerifikasiKelas');
+    Route::post('kelas/verifikasi/{id}', [KelasController::class, 'verifikasiKelas'])->name('setVerifikasiKelas');
+    Route::get('kelas/absensi/{id}/generate_QRCode', [KelasController::class, 'getQRCodeAbsen'])->name('createAbsensi');
+    Route::get('kelas/absensi/QRCode/download/{id}', [KelasController::class, 'downloadAbsen'])->name('downloadQRCode');
+    //Absensi
+    //Absensi
+    Route::get('/absensi', [AttendanceController::class, 'index']);
+    Route::get('/absensi/generate_QRCode', [AttendanceController::class, 'generate'])->name('createAbsensiMasuk');
+    Route::get('absensi/QRCode/keluar/{id}', [AttendanceController::class, 'keluar'])->name('keluarAbsensi');
     //Latihan Spesialisasi
     Route::resource('admin/latihanSpesialisasi', LatihanSpesialisasiController::class);
     //Promo
     Route::resource('admin/promo', PromoController::class);
     //Laporan Keuangan
-    Route::get('/karyawan/laporanKeuangan', [LaporanKeuanganController::class, 'index'])->name('laporanKeuangan');
-    Route::get('/karyawan/laporanKeuangan/download/', [LaporanKeuanganController::class, 'download'])->name('laporanKeuanganDownload');
+    Route::get('/admin/laporanKeuangan', [LaporanKeuanganController::class, 'index'])->name('laporanKeuangan');
+    Route::get('admin/laporanKeuangan/pilihTanggal', [LaporanKeuanganController::class, 'pilihTanggalDownload'])->name('pilihPeriodeLK');
+    Route::post('/admin/laporanKeuangan/download/', [LaporanKeuanganController::class, 'download'])->name('laporanKeuanganDownload');
     //Absensi
     Route::get('/absensi', [AttendanceController::class, 'index']);
-    Route::get('/absensi/generate_QRCode', [AttendanceController::class, 'generate'])->name('createAbsensi');
-    Route::get('absensi/QRCode/keluar/{id}', [AttendanceController::class, 'keluar'])->name('keluarAbsensi');
 });
 
 Route::middleware(['Karyawan'])->group(function () {
