@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
-use Barryvdh\DomPDF\PDF;
+use FPDF;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\User;
@@ -270,10 +270,10 @@ class KelasController extends Controller
         ];
         CodeQR::create($data);
         //Download QR Code
-        $headers = [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="qrcode.pdf"',
-        ];
-        return response()->download($pathToFile, null, $headers);        
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->Image($pathToFile, 0, 0, 200, 200);
+        $pdf->Output('QR Code Absensi.pdf', 'D');
+
     }
 }
