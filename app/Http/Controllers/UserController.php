@@ -276,7 +276,7 @@ class UserController extends Controller
         }
     }
     public function searchUsers(Request $request){
-        
+        $data = $request->cari;
     }
 
     public function formResetPassword(){

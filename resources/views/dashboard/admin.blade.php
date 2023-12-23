@@ -61,7 +61,7 @@
                 <div class="col-md-4">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>0</h3>
+                            <h3>{{ $ruang }}</h3>
                             <p>Ruangan Terpakai</p>
                         </div>
                         <div class="icon">

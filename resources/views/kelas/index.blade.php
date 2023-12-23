@@ -61,7 +61,9 @@
                                         @if($user->status == 'Menunggu pemilihan ruang dan verifikasi' || $user->status == 'Penggantian Data - Menunggu Verifikasi Admin' || $user->status == 'Menunggu pemilihan ruangan, sudah divalidasi admin')
                                             <a class="badge bg-secondary" href="{{ route('pilihRuang', $user->kelasID)}}">Pilih Ruang</span></a>
                                         @endif
-                                        <button class="badge bg-light"><a href="{{ route('createAbsensi', $user->kelasID)}}">Buat QR Code Absensi</span></a></button>
+                                        @if($user->status == 'Sudah Diverifikasi Admin')
+                                            <button class="badge bg-light"><a href="{{ route('downloadQRCode', $user->kelasID)}}">Buat QR Code Absensi</span></a></button>
+                                        @endif
                                         <button class="badge bg-info"><a href="{{ route('kelas.show', $user->kelasID)}}">Lihat Data Kelas</span></a></button>
                                         <button class="badge bg-success"><a href="{{ route('kelas.edit', $user->kelasID)}}">Edit Data Kelas</span></a></button>
                                         @csrf

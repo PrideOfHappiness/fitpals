@@ -69,8 +69,8 @@ Route::middleware(['Admin'])->group(function () {
     Route::post('/admin/kelas/setPilihRuang/{id}', [KelasController::class, 'setPilihRuang'])->name('setPilihRuang');
     Route::get('kelas/verifikasi', [KelasController::class, 'verifikasi'])->name('getVerifikasiKelas');
     Route::post('kelas/verifikasi/{id}', [KelasController::class, 'verifikasiKelas'])->name('setVerifikasiKelas');
-    Route::get('kelas/absensi/{id}/generate_QRCode', [KelasController::class, 'getQRCodeAbsen'])->name('createAbsensi');
-    Route::get('kelas/absensi/QRCode/download/{id}', [KelasController::class, 'downloadAbsen'])->name('downloadQRCode');
+    Route::get('kelas/absensi/{kelasID}/generate_QRCode', [KelasController::class, 'getQRCodeAbsen'])->name('createAbsensi');
+    Route::get('kelas/absensi/QRCode/download/{QRCode_code}', [KelasController::class, 'downloadAbsen'])->name('downloadQRCode');
     //Absensi
     //Absensi
     Route::get('/absensi', [AttendanceController::class, 'index']);

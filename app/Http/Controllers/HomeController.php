@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ruang;
 use Illuminate\Http\Request;
 use App\Models\TrafficLogin;
 use App\Models\Akuntansi;
@@ -35,6 +36,7 @@ class HomeController extends Controller
     public function adminHome(){
         $absensi = Attendance::where('userID', '=', Auth::user()->userID)->count();
         $traffic = TrafficLogin::groupBy('userID')->count();
+        $ruang = Ruang::groupBy('namaRuang')->count();
         //Hitung pemasukkan, pengeluaran
         $start_date = Carbon::now()->startOfMonth()->toDateString();
         $end_date = Carbon::now()->endOfMonth()->toDateString();
@@ -68,6 +70,7 @@ class HomeController extends Controller
             'pengeluaran' => $pengeluaran,
             'traffic' => $traffic,
             'absensi' => $absensi,
+            'ruang' => $ruang,
         ]);
     }
 

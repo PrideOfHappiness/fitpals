@@ -18,6 +18,7 @@ class CodeQR extends Model
         'status', 
         'data',
         'datetime_used',
+        'namaFile',
     ];
 
     public function getCodeQRIDUsers(){

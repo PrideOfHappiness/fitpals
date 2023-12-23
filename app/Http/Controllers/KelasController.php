@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\User;
@@ -10,10 +11,12 @@ use App\Models\Trainer;
 use App\Models\Ruang;
 use Carbon\Carbon;
 use App\Models\CodeQR;
+use Endroid\QrCode\Writer\PngWriter;
 use Str;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Response;
+use Endroid\QrCode\QrCode;
+use Auth;
+use Storage;
+use Crypt;
 
 class KelasController extends Controller
 {
@@ -239,28 +242,38 @@ class KelasController extends Controller
             ->with('info', 'Data Kelas ' . $status . ' !');
     }
 
-    public function getQRCodeAbsen($kelasID){
-        $kelas = Kelas::find($kelasID);
-        $kode = strtoupper(Str::random(20));
-        $QRCode  = QrCode::generate($kode);
-
-        $data = CodeQR::create([
-            'QRCode_code' => $kode,
-            'kelasID' => $kelas->kelasID,
-            'status' => 'Baru',
-            'data' => $kode,
-            'datetime_used' => Carbon::now(),
-        ]);
-        return view('kelas.absensi', compact('QRCode', 'data'));
+    public function getQRCodeAbsen($kelasID){   
     }
-    public function downloadAbsen($kode){
+
+    public function downloadAbsen($kelasID){
         set_time_limit(300);
-        $qrCode = QrCode::size(300)->generate($kode);
-        $path = storage_path('app/public/qrcodes/') . $kode . '.png';
-        file_put_contents($path, $qrCode);
-
-        // Memberikan file untuk diunduh
-        return Response::download($path, 'qrcode.png');
-
+        $kelas = Kelas::find($kelasID);
+        $kodeQrcode = Str::random(10);
+        //Buat QR Code
+        $writer = new PngWriter();
+        $qrcode = QrCode::create($kelas->kelasID);
+        $result = $writer->write($qrcode);
+        $namaFile = $kelas->nama_kelas . '_' . Auth::user()->locationID .'_' .Str::random(5) . '.png';
+        $pathToFile = public_path('foto/qr_code/' . $kelas->nama_kelas . '_' . Auth::user()->locationID .'_' .Str::random(5) . '.png');
+        
+        // Simpan gambar QR Code
+        $result->saveToFile($pathToFile);
+         
+        //Tangkap dan simpan data kelas dan QR Codenya
+        $data = [
+            'QRCode_code' => $kodeQrcode,
+            'kelasID' => $kelas->kelasID,
+            'userID' => Auth::user()->userID,
+            'status' => 'Baru',
+            'data' => $kodeQrcode,
+            'namaFile' => $namaFile,
+        ];
+        CodeQR::create($data);
+        //Download QR Code
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="qrcode.pdf"',
+        ];
+        return response()->download($pathToFile, null, $headers);        
     }
 }
