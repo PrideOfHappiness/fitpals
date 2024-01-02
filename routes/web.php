@@ -54,6 +54,7 @@ Route::middleware(['Admin'])->group(function () {
     Route::post('/users/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
     //Trainer
     Route::resource('/admin/trainer', TrainerController::class);
+    Route::post('/admin/trainer/cari', [TrainerController::class, 'searchTrainer'])->name('searchTrainer');
     //Lokasi
     Route::resource('/admin/lokasi', LokasiController::class);
     Route::post('/admin/lokasi/cari', [LokasiController::class, 'searchLokasi'])->name('searchLokasi');
@@ -61,6 +62,7 @@ Route::middleware(['Admin'])->group(function () {
     Route::resource('/admin/latihan', LatihanController::class);
     //Ruangan
     Route::resource('/admin/ruangan', RuangController::class);
+    Route::post('/admin/ruangan/cari', [RuangController::class, 'searchRuangan'])->name('searchRuangan');
     //Company Info
     Route::resource('/admin/aboutUs', AboutUsController::class);
     //Kelas

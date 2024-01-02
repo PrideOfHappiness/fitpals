@@ -277,6 +277,21 @@ class UserController extends Controller
     }
     public function searchUsers(Request $request){
         $data = $request->cari;
+        $data2 = $request->pencarian;
+        $pencarian = User::query();
+        $data3 = [];
+
+        if($data && $data2){
+            $data3[] = ['nama', 'LIKE', '%'. $data .'%'];
+            $data3[] = ['kategori', '=', $data2];
+        }elseif($data){
+            $data3[] = ['nama', 'LIKE', '%'. $data .'%'];
+        }else{
+            $data3[] = ['kategori', '=', $data2];
+        }
+
+        $hasil = $pencarian->where($data3)->get();
+        return view('users.hasil', compact('hasil'));
     }
 
     public function formResetPassword(){
@@ -312,6 +327,7 @@ class UserController extends Controller
     public function formIndexSetPassword(){
         return view('users.resetPassword');
     }
+
     public function updatePassword(Request $request){
         
         $this->validate($request, [

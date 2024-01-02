@@ -104,4 +104,26 @@ class TrainerController extends Controller
             ->with('success','Data sudah dihapus!');
     }
 
+    public function searchTrainer(Request $request){
+        $data = $request->cari;
+        $data2 = $request->pencarian;
+        $query = Trainer::query();
+
+        if ($data && $data2) {
+            $hasil = $query->whereHas('getUserIDTrainer', function($query) use($data){
+                    $query->where('nama', 'LIKE', '%'. $data .'%');
+                })
+                ->where('jenis', $data2)
+                ->get();
+        } elseif ($data2) {
+            $hasil = $query->where('jenis', $data2)->get();
+        } elseif ($data) {
+            $hasil = $query->whereHas('getUserIDTrainer', function($query) use($data){
+                    $query->where('nama', 'LIKE', '%'. $data .'%');
+                })
+                ->get();
+        }
+        return view('trainer.hasil', compact('hasil'));
+    }
+
 }

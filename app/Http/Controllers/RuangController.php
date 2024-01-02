@@ -124,4 +124,12 @@ class RuangController extends Controller
         $ruang->delete();
         return redirect()->route('ruangan.index')->with('success','Data berhasil dihapus!');
     }
+
+    public function searchRuangan(Request $request){
+        $data = $request->cari;
+        $pencarian = Ruang::query();
+
+        $hasil = $pencarian->where('namaRuang', 'LIKE', '%'. $data . '%')->get();
+        return view('ruang.hasil', compact('hasil'));
+    }
 }

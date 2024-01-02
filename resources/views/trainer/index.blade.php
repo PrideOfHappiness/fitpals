@@ -28,16 +28,14 @@
                             Tambah Data Trainer
                     </a>
                 </div>
-                <form action='{{route('searchUsers')}}' method="post">
+                <form action='{{route('searchTrainer')}}' method="post">
                     @csrf
                     <div class="pull-right mb-2" class="wrapper"> 
                         <label for="pencarian" class="form-label">Cari berdasarkan kategori Trainer: </label>
                         <select name="pencarian" id="pencarian" class="js-example-basic-single form-control">
                             <option value="">Silahkan pilih kategori terlebih dahulu!</option>
-                            <option value="karyawan"> Karyawan</option>
                                 <option value="personal trainer"> Personal Trainer </option>
-                                <option value="trainer"> Trainer Umum</option>
-                                <option value="trainer_personal trainer"> Trainer Umum dan Personal Trainer </option>                                
+                                <option value="trainer"> Trainer Umum</option>                                
                         </select>
                         <label for="cari" class="form-label">Atau, Cari dengan nama: </label>
                         <input type="text" class="form-control" id="cari" name="cari" placeholder="Masukkan nama yang dicari disini">

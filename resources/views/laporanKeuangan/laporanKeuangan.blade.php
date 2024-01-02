@@ -66,7 +66,7 @@
 </head>
 <body> 
     <header>
-        <img src="{{ asset('style/dist/img/fitpals_logo.jpg')}}" alt="Logo Fitpals" class="logo">
+        <!--img src="{{ asset('style/dist/img/fitpals_logo.jpg')}}" alt="Logo Fitpals" class="logo"-->
         <h1>{{ $locationNama }}</h1>
         <p>{{ $locationAlamat }}</p>
         <p>No. Telepon: {{ $locationTelp }}</p>

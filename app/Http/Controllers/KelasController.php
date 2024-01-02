@@ -14,9 +14,7 @@ use App\Models\CodeQR;
 use Endroid\QrCode\Writer\PngWriter;
 use Str;
 use Endroid\QrCode\QrCode;
-use Auth;
-use Storage;
-use Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {

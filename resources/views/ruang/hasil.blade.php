@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('template/header')
-    <title>Hasil Pencarian Data Users</title>
+    <title>Data Ruangan</title>
 </head>
 <body>
     @include('template/navbar')
@@ -22,13 +22,19 @@
         <div class="mt-4"> 
             <section class="content"> 
                 <br>
+                <div class = "pull-right mb-2">
+                    <a class="btn btn-success" href="{{ route('ruangan.create') }}"> 
+                        <i class="fa-solid fa-plus"></i>
+                            Tambah Data Ruangan
+                    </a>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>No. </th>
-                            <th>User ID</th>
-                            <th>Nama </th>
-                            <th>Jabatan </th>
+                            <th>Ruang ID</th>
+                            <th>Nama Ruang</th>
+                            <th>Lokasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,17 +42,16 @@
                         @foreach ($hasil as $user)
                             <tr>
                                 <td>{{ $i++}}</td>
-                                <td>{{ $user->userID }}</td>
-                                <td>{{ $user->nama }}</td>
-                                <td>{{ $user->kategori }}</td>
+                                <td>{{ $user->ruangID }}</td>
+                                <td>{{ $user->namaRuang }}</td>
+                                <td>{{ $user->locationIDRuang->namaLokasi }}</td>
                                 <td>
-                                    <form action = "{{ route('users.destroy', $user->userID) }}" method="Post">
-                                        <button class="badge bg-info"><a href="{{ route('users.show', $user->userID)}}">Detail Data Users</span></a></button>
-                                        <button class="badge bg-success"><a href="{{ route('users.edit', $user->userID)}}">Edit Data Users</span></a></button>
-                                        <button class="badge bg-warning"><a href="/users/resetpassword/email">Reset Password</span></a></button>
+                                    <form action = "{{ route('ruangan.destroy', $user->ruangID) }}" method="Post">
+                                        <button class="badge bg-info"><a href="{{ route('ruangan.show', $user->ruangID)}}">Edit Data Ruang</span></a></button>
+                                        <button class="badge bg-success"><a href="{{ route('ruangan.edit', $user->ruangID)}}">Edit Data Ruang</span></a></button>
                                         @csrf
                                             @method("DELETE")
-                                            <button type="submit" class="badge bg-danger"> Hapus Data Users</button>
+                                            <button type="submit" class="badge bg-danger"> Hapus Data Ruang</button>
                                     </form>
                                 </td>
                             </tr>

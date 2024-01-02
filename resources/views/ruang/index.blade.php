@@ -28,7 +28,7 @@
                             Tambah Data Ruangan
                     </a>
                 </div>
-                <form action='{{route('searchMember')}}' method="post">
+                <form action='{{route('searchRuangan')}}' method="post">
                     @csrf
                         <label for="cari" class="form-label">Atau, Cari dengan nama: </label>
                         <input type="text" class="form-control" id="cari" name="cari" placeholder="Masukkan nama ruang yang dicari disini">
